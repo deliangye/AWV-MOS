@@ -1,0 +1,8 @@
+history/evaluation_results/*
+!history/evaluation_results/.gitkeep
+history/log/*
+!history/log/.gitkeep
+history/predictions/*
+!history/predictions/.gitkeep
+history/odometry/*
+!history/odometry/.gitkeep

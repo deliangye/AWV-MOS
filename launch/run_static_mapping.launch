@@ -1,0 +1,19 @@
+<launch>
+    <arg name="scan_folder_path" default="/media/aimlab/T7/dataset/Kitti_dataset/semantic_dataset/sequences/08/velodyne/" />
+    <arg name="poses_file_path" default="/home/aimlab/seongjun_ws/ros_ws/awv_mos_lio_ws/src/AWV-MOS-LIO/history/odometry/08_lio_sam_poses(cam).txt" />
+    <arg name="calib_file_path" default="/media/aimlab/T7/dataset/Kitti_dataset/semantic_dataset/sequences/08/calib.txt" />
+    <arg name="m_config_file_path" default="$(find awv_mos_lio)/config/params_kitti.yaml"/>
+
+    <!-- Parameters -->
+    <param name="m_config_file_path" value="$(arg m_config_file_path)" />
+    <param name="m_log_write_path" value="$(find awv_mos_lio)/history/log/" />
+    <param name="scan_folder_path" value="$(arg scan_folder_path)" />
+    <param name="poses_file_path" value="$(arg poses_file_path)" />
+    <param name="calib_file_path" value="$(arg calib_file_path)" />
+    <rosparam file="$(arg m_config_file_path)" command="load" />
+
+    <!-- AWV-MOS static mapping -->
+    <node pkg="awv_mos_lio" type="run_static_mapping" name="run_static_mapping" output="screen" respawn="false"/>
+
+    <node pkg="rviz" type="rviz" name="awv_mos_rviz" args="-d $(find awv_mos_lio)/config/rviz/scan_view.rviz" />
+</launch>

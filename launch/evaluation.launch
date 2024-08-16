@@ -1,0 +1,14 @@
+<launch>
+    <arg name="bag_record_path" default=""/>
+    <arg name="bag_file_name" default=""/>
+
+    <node pkg="awv_mos_lio" type="mos_evaluation"      name="mos_evaluation"       output="screen">
+        <param name="m_cfg_b_exclude_ground" value="false"/>
+        <param name="m_cfg_b_use_bagfile" value="true"/>
+        <param name="m_cfg_i_start_frame" value="150"/>
+        <param name="m_cfg_i_end_frame" value="0"/>
+        <param name="m_cfg_s_bag_file_name_path" value="$(arg bag_record_path)$(arg bag_file_name)"/>
+        <param name="m_cfg_s_pc2_topic" value="/awv_mos/segmented_new_scan_all"/>
+        <param name="m_cfg_s_result_file_path" value="$(find awv_mos_lio)/history/evaluation_results/"/>
+    </node>
+</launch>
