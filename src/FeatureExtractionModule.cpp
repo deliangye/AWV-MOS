@@ -1,7 +1,7 @@
 #define PCL_NO_PRECOMPILE 
 // #include "utility.h"
 
-#include "awv_mos_lio/cloud_info.h"
+#include "awv_mos/cloud_info.h"
 
 #include <ros/ros.h>
 
@@ -147,7 +147,7 @@ private:
     float odomIncreY;
     float odomIncreZ;
 
-    awv_mos_lio::cloud_info cloudInfo;
+    awv_mos::cloud_info cloudInfo;
     double timeScanCur;
     double timeScanEnd;
     std_msgs::Header cloudHeader;
@@ -265,7 +265,7 @@ public:
         subLaserCloud = nh.subscribe<sensor_msgs::PointCloud2>(pointCloudTopic, 100, &FeatureExtractionModule::cloudHandler, this, ros::TransportHints().tcpNoDelay());
         // subLaserCloud = nh.subscribe<sensor_msgs::PointCloud2>(pointCloudTopic, 100, &FeatureExtractionModule::cloudHandler_noloss, this, ros::TransportHints().tcpNoDelay());
 
-        pubLaserCloudInfo = nh.advertise<awv_mos_lio::cloud_info> ("lio_sam/feature/cloud_info", 1);
+        pubLaserCloudInfo = nh.advertise<awv_mos::cloud_info> ("lio_sam/feature/cloud_info", 1);
         pubFeaturePoints = nh.advertise<sensor_msgs::PointCloud2>("lio_sam/feature/cloud_feature", 1);
 
         ang_res_x = 360.0/float(Horizon_SCAN);

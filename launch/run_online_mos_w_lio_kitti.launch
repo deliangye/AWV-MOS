@@ -1,9 +1,9 @@
 <launch>
-    <arg name="m_config_file_path" default="$(find awv_mos_lio)/config/params_kitti.yaml"/>
+    <arg name="m_config_file_path" default="$(find awv_mos)/config/params_kitti.yaml"/>
 
     <!-- Parameters -->
     <param name="m_config_file_path" value="$(arg m_config_file_path)" />
-    <param name="m_log_write_path" value="$(find awv_mos_lio)/history/log/" />
+    <param name="m_log_write_path" value="$(find awv_mos)/history/log/" />
     <rosparam file="$(arg m_config_file_path)" command="load" />
 
     <!-- AWV-MOS-LIO -->
@@ -11,5 +11,5 @@
     <node pkg="$(arg project)" type="$(arg project)_FeatureExtractionModule"   name="$(arg project)_FeatureExtractionModule"    output="screen" 	respawn="true"/>
     <node pkg="$(arg project)" type="$(arg project)_mapOptmization"      name="$(arg project)_mapOptmization"       output="screen"     respawn="false"/>
 
-    <node pkg="rviz" type="rviz" name="awv_mos_rviz" args="-d $(find awv_mos_lio)/config/rviz/scan_view.rviz" />
+    <node pkg="rviz" type="rviz" name="awv_mos_rviz" args="-d $(find awv_mos)/config/rviz/scan_view.rviz" />
 </launch>

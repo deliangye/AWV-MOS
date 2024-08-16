@@ -1,7 +1,7 @@
 #define PCL_NO_PRECOMPILE 
 
 // #include "utility.h"
-#include "awv_mos_lio/cloud_info.h"
+#include "awv_mos/cloud_info.h"
 
 #include <ros/ros.h>
 
@@ -159,8 +159,8 @@ public:
     ros::ServiceServer srvSaveMap;
 
     std::deque<nav_msgs::Odometry> gpsQueue;
-    awv_mos_lio::cloud_info cloudInfo;
-    std::deque<awv_mos_lio::cloud_info> m_vec_cloud_info_queue;
+    awv_mos::cloud_info cloudInfo;
+    std::deque<awv_mos::cloud_info> m_vec_cloud_info_queue;
 
     vector<pcl::PointCloud<PointTypeMOS>::Ptr> cornerCloudKeyFrames;
     vector<pcl::PointCloud<PointTypeMOS>::Ptr> surfCloudKeyFrames;
@@ -337,7 +337,7 @@ public:
         pubLaserOdometryInitial      = nh.advertise<nav_msgs::Odometry> ("lio_sam/mapping/odometry_initial", 1);
         pubPath                     = nh.advertise<nav_msgs::Path>("lio_sam/mapping/path", 1);
 
-        subCloud = nh.subscribe<awv_mos_lio::cloud_info>("lio_sam/feature/cloud_info", 100, &mapOptimization::laserCloudInfoHandler, this, ros::TransportHints().tcpNoDelay());
+        subCloud = nh.subscribe<awv_mos::cloud_info>("lio_sam/feature/cloud_info", 100, &mapOptimization::laserCloudInfoHandler, this, ros::TransportHints().tcpNoDelay());
 
         pubHistoryKeyFrames   = nh.advertise<sensor_msgs::PointCloud2>("lio_sam/mapping/icp_loop_closure_history_cloud", 1);
         pubIcpKeyFrames       = nh.advertise<sensor_msgs::PointCloud2>("lio_sam/mapping/icp_loop_closure_corrected_cloud", 1);
@@ -346,7 +346,7 @@ public:
         pubRecentKeyFrame     = nh.advertise<sensor_msgs::PointCloud2>("lio_sam/mapping/cloud_registered", 1);
         pubCloudRegisteredRaw = nh.advertise<sensor_msgs::PointCloud2>("lio_sam/mapping/cloud_registered_raw", 1);
 
-        pubSLAMInfo           = nh.advertise<awv_mos_lio::cloud_info>("lio_sam/mapping/slam_info", 1);
+        pubSLAMInfo           = nh.advertise<awv_mos::cloud_info>("lio_sam/mapping/slam_info", 1);
 
         downSizeFilterCorner.setLeafSize(mappingCornerLeafSize, mappingCornerLeafSize, mappingCornerLeafSize);
         downSizeFilterSurf.setLeafSize(mappingSurfLeafSize, mappingSurfLeafSize, mappingSurfLeafSize);
@@ -422,7 +422,7 @@ public:
         matP = cv::Mat(6, 6, CV_32F, cv::Scalar::all(0));
     }
 
-    void laserCloudInfoHandler(const awv_mos_lio::cloud_infoConstPtr& msgIn)
+    void laserCloudInfoHandler(const awv_mos::cloud_infoConstPtr& msgIn)
     {
         m_mutexInputPointCloud.lock();
         m_vec_cloud_info_queue.push_front(*msgIn);
@@ -1366,7 +1366,7 @@ public:
         {
             if (lastSLAMInfoPubSize != (int)cloudKeyPoses6D->size())
             {
-                awv_mos_lio::cloud_info slamInfo;
+                awv_mos::cloud_info slamInfo;
                 slamInfo.header.stamp = timeLaserInfoStamp;
                 pcl::PointCloud<PointTypeMOS>::Ptr cloudOut(new pcl::PointCloud<PointTypeMOS>());
                 *cloudOut += *laserCloudCornerLastDS;

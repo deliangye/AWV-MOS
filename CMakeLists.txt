@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(awv_mos_lio)
+project(awv_mos)
 
 option(USE_EVALUATION_POINT_TYPE "Use evaluation point type" OFF)
 if(USE_EVALUATION_POINT_TYPE)

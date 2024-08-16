@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <package>
-  <name>awv_mos_lio</name>
+  <name>awv_mos</name>
   <version>1.0.0</version>
   <description>Lidar Odometry</description>
 
