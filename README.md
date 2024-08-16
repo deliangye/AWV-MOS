@@ -1,7 +1,8 @@
-# AWV-MOS-LIO
+# AWV-MOS
 version 2024-08-01
 
 ## Introduction
+- AWV-MOS is **a novel visibility-based MOS method that utilizes an adaptive window considering the uncertainty of points**.
 - AWV-MOS-LIO is **a online LiDAR Moving Object Segmentation system integrated with LiDAR inertial odometry**.
 - The dataset used for paper experiments can be downloaded from the NAS server.
 - Currently, this package only provide codes for Online MOS operation.
